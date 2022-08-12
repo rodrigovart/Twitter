@@ -6,5 +6,5 @@ target 'Twitter' do
   use_frameworks!
 
   # Pods for Twitter
-
+  pod 'SwiftMessages'
 end

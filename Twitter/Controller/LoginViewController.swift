@@ -11,12 +11,15 @@ class LoginViewController: UIViewController {
     
     lazy var loginView: LoginView = {
         let view = LoginView()
+        view.delegate = self
         return view
     }()
-
+    
+    var isValidLogin = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
     }
     
@@ -34,4 +37,25 @@ class LoginViewController: UIViewController {
             paddingRight: 30
         )
     }
+}
+
+extension LoginViewController: LoginDelegate {
+    func validate() {
+        if isValidLogin {
+            let controller = MainTabBarController()
+            controller.modalPresentationStyle = .fullScreen
+            present(controller, animated: true, completion: nil)
+            return
+        }
+        
+        showMessage("Preencha todos os campos!", "", "🤔", .warning)
+    }
+    
+    func signUp() {
+        let controller = SignUpViewController()
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true, completion: nil)
+        return
+    }
+    
 }

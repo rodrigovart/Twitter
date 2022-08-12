@@ -16,6 +16,6 @@ class MessageViewController: UIViewController {
     
     func setupUI() {
         view.backgroundColor = .white
-        navigationItem.title = "Mensagens"
+        navigationItem.title = "Messages"
     }
 }
