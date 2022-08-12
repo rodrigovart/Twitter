@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkyFloatingLabelTextField
 
 protocol LoginDelegate: AnyObject {
     func validate()
@@ -25,27 +26,35 @@ class LoginView: UIView {
         return image
     }()
     
-    lazy var emailTextField: UITextField = {
-        let textField = UITextField()
+    lazy var emailTextField: SkyFloatingLabelTextFieldWithIcon = {
+        let textField = SkyFloatingLabelTextFieldWithIcon()
+        textField.iconType = .image
+        textField.placeholder = "Enter your Email"
+        textField.placeholderColor = .white
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.setIcon(UIImage(named: "mail")!)
-        textField.attributedPlaceholder = NSAttributedString(
-            string: "Email",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]
-        )
+        textField.iconImage = UIImage(named: "ic_mail_outline_white_2x-1")!
+        textField.textColor = .white
         textField.tintColor = .white
+        textField.selectedTitleColor = .white
+        textField.selectedLineColor = .white
+        textField.disabledColor = .white
+        textField.updateColors()
         return textField
     }()
     
-    lazy var passwordTextField: UITextField = {
-        let textField = UITextField()
+    lazy var passwordTextField: SkyFloatingLabelTextFieldWithIcon = {
+        let textField = SkyFloatingLabelTextFieldWithIcon()
+        textField.iconType = .image
+        textField.placeholder = "Enter your Password"
+        textField.placeholderColor = .white
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.setIcon(UIImage(named: "ic_lock_outline_white_2x")!)
-        textField.attributedPlaceholder = NSAttributedString(
-            string: "Senha",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]
-        )
+        textField.iconImage = UIImage(named: "ic_lock_outline_white_2x")!
+        textField.textColor = .white
         textField.tintColor = .white
+        textField.selectedTitleColor = .white
+        textField.selectedLineColor = .white
+        textField.disabledColor = .white
+        textField.updateColors()
         textField.isSecureTextEntry = true
         return textField
     }()
@@ -56,6 +65,8 @@ class LoginView: UIView {
         button.tintColor = .twitterBlue
         button.backgroundColor = .white
         button.setTitle("Log In", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.layer.cornerRadius = 5
         button.anchor(height: 50)
         button.addTarget(self, action: #selector(validateTextField), for: .touchUpInside)
         return button
@@ -71,14 +82,14 @@ class LoginView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.isUserInteractionEnabled = true
-        label.text = "Don't have an account? Sign Up"
+        label.attributedString("Don't have an account? ", "Sign Up")
         label.textColor = .white
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapSignUpLabel))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapSignUpLabel))
         label.addGestureRecognizer(tap)
         label.sizeToFit()
         return label
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         

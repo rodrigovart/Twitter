@@ -7,4 +7,5 @@ target 'Twitter' do
 
   # Pods for Twitter
   pod 'SwiftMessages'
+  pod 'SkyFloatingLabelTextField'
 end

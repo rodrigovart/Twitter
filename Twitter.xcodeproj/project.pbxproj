@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9DB554C628A69CDF004FD3DC /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB554C528A69CDF004FD3DC /* UILabel+Ext.swift */; };
 		9DE467F028A4237100990F42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE467EF28A4237100990F42 /* AppDelegate.swift */; };
 		9DE467F228A4237100990F42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE467F128A4237100990F42 /* SceneDelegate.swift */; };
 		9DE467F728A4237100990F42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DE467F528A4237100990F42 /* Main.storyboard */; };
@@ -22,12 +23,12 @@
 		9DE4681C28A58F9600990F42 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4681B28A58F9600990F42 /* LoginViewController.swift */; };
 		9DE4681E28A5900600990F42 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4681D28A5900600990F42 /* SignUpViewController.swift */; };
 		9DE4682028A5931900990F42 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4681F28A5931900990F42 /* LoginView.swift */; };
-		9DE4682228A59E3200990F42 /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4682128A59E3200990F42 /* UITextField+Ext.swift */; };
 		9DE4682428A59E5300990F42 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4682328A59E5300990F42 /* UIColor+Ext.swift */; };
 		9DEE58CD28A67FE1006377C3 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEE58CC28A67FE1006377C3 /* UIViewController+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9DB554C528A69CDF004FD3DC /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
 		9DE467EC28A4237100990F42 /* Twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE467EF28A4237100990F42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DE467F128A4237100990F42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,7 +46,6 @@
 		9DE4681B28A58F9600990F42 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9DE4681D28A5900600990F42 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		9DE4681F28A5931900990F42 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		9DE4682128A59E3200990F42 /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
 		9DE4682328A59E5300990F42 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		9DEE58CC28A67FE1006377C3 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,9 +108,9 @@
 			isa = PBXGroup;
 			children = (
 				9DE4681928A57DE700990F42 /* UIView+Ext.swift */,
-				9DE4682128A59E3200990F42 /* UITextField+Ext.swift */,
 				9DE4682328A59E5300990F42 /* UIColor+Ext.swift */,
 				9DEE58CC28A67FE1006377C3 /* UIViewController+Ext.swift */,
+				9DB554C528A69CDF004FD3DC /* UILabel+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -233,11 +233,11 @@
 				9DE467F028A4237100990F42 /* AppDelegate.swift in Sources */,
 				9DE4681A28A57DE700990F42 /* UIView+Ext.swift in Sources */,
 				9DEE58CD28A67FE1006377C3 /* UIViewController+Ext.swift in Sources */,
+				9DB554C628A69CDF004FD3DC /* UILabel+Ext.swift in Sources */,
 				9DE4681628A435D500990F42 /* TabBarModel.swift in Sources */,
 				9DE4681E28A5900600990F42 /* SignUpViewController.swift in Sources */,
 				9DE467F228A4237100990F42 /* SceneDelegate.swift in Sources */,
 				9DE4681028A4274200990F42 /* ExploreViewController.swift in Sources */,
-				9DE4682228A59E3200990F42 /* UITextField+Ext.swift in Sources */,
 				9DE4682428A59E5300990F42 /* UIColor+Ext.swift in Sources */,
 				9DE4682028A5931900990F42 /* LoginView.swift in Sources */,
 				9DE4680D28A426E200990F42 /* FeedViewController.swift in Sources */,
