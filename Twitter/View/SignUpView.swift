@@ -1,28 +1,31 @@
 //
-//  LoginView.swift
+//  SignUpView.swift
 //  Twitter
 //
-//  Created by Rodrigo Vart on 11/08/22.
+//  Created by Rodrigo Vart on 12/08/22.
 //
 
 import SkyFloatingLabelTextField
 
-protocol LoginDelegate: AnyObject {
+protocol SignUpDelegate: AnyObject {
+    func photoPicker()
     func validate()
-    func signUp()
+    func login()
 }
 
-class LoginView: UIView {
-    var delegate: LoginViewController?
+class SignUpView: UIView {
+    var delegate: SignUpViewController?
     
-    lazy var logoImageView: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "TwitterLogo")
-        image.contentMode = .scaleAspectFit
-        image.clipsToBounds = true
-        image.anchor(width: 200, height: 200)
-        return image
+    lazy var imagePhoto: UIImageView = {
+        let imagePhoto = UIImageView()
+        imagePhoto.translatesAutoresizingMaskIntoConstraints = false
+        imagePhoto.isUserInteractionEnabled = true
+        imagePhoto.image = UIImage(named: "plus_photo")?.tint(.white)!
+        imagePhoto.contentMode = .scaleAspectFit
+        imagePhoto.clipsToBounds = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapButtonPhoto))
+        imagePhoto.addGestureRecognizer(tapGestureRecognizer)
+        return imagePhoto
     }()
     
     lazy var emailTextField: SkyFloatingLabelTextFieldWithIcon = {
@@ -58,12 +61,45 @@ class LoginView: UIView {
         return textField
     }()
     
+    lazy var fullNameTextField: SkyFloatingLabelTextFieldWithIcon = {
+        let textField = SkyFloatingLabelTextFieldWithIcon()
+        textField.iconType = .image
+        textField.placeholder = "Enter your Full Name"
+        textField.placeholderColor = .white
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.iconImage = UIImage(named: "ic_person_outline_white_2x")!
+        textField.textColor = .white
+        textField.tintColor = .white
+        textField.selectedTitleColor = .white
+        textField.selectedLineColor = .white
+        textField.disabledColor = .white
+        textField.updateColors()
+        return textField
+    }()
+    
+    lazy var userNameTextField: SkyFloatingLabelTextFieldWithIcon = {
+        let textField = SkyFloatingLabelTextFieldWithIcon()
+        textField.iconType = .image
+        textField.placeholder = "Enter your Username"
+        textField.placeholderColor = .white
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.iconImage = UIImage(named: "ic_person_outline_white_2x")!
+        textField.textColor = .white
+        textField.tintColor = .white
+        textField.selectedTitleColor = .white
+        textField.selectedLineColor = .white
+        textField.disabledColor = .white
+        textField.updateColors()
+        textField.isSecureTextEntry = true
+        return textField
+    }()
+    
     lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .twitterBlue
         button.backgroundColor = .white
-        button.setTitle("Log In", for: .normal)
+        button.setTitle("Sign Up", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.layer.cornerRadius = 5
         button.anchor(height: 50)
@@ -71,13 +107,13 @@ class LoginView: UIView {
         return button
     }()
     
-    lazy var signUpButton: UIButton = {
+    lazy var haveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .twitterBlue
-        button.attributedString("Don't have an account? ", "Sign Up")
+        button.attributedString("Already have an account? ", "Log In")
         button.anchor(height: 50)
-        button.addTarget(self, action: #selector(tapSignUpLabel), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapLoginLabel), for: .touchUpInside)
         return button
     }()
     
@@ -87,21 +123,27 @@ class LoginView: UIView {
         setupView()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setupView() {
-        let stackViewLogo = UIStackView()
-        stackViewLogo.addArrangedSubview(logoImageView)
-        stackViewLogo.axis = .horizontal
-        addSubview(stackViewLogo)
+        let stackViewPhoto = UIStackView()
+        stackViewPhoto.addArrangedSubview(imagePhoto)
+        addSubview(stackViewPhoto)
         
-        stackViewLogo.anchor(
+        stackViewPhoto.anchor(
             top: safeAreaLayoutGuide.topAnchor,
             left: leftAnchor,
-            right: rightAnchor
+            right: rightAnchor,
+            paddingBottom: 100
         )
         
         let stackViewTextFields = UIStackView()
         stackViewTextFields.addArrangedSubview(emailTextField)
         stackViewTextFields.addArrangedSubview(passwordTextField)
+        stackViewTextFields.addArrangedSubview(fullNameTextField)
+        stackViewTextFields.addArrangedSubview(userNameTextField)
         stackViewTextFields.addArrangedSubview(loginButton)
         stackViewTextFields.axis = .vertical
         stackViewTextFields.spacing = 10
@@ -109,17 +151,17 @@ class LoginView: UIView {
         addSubview(stackViewTextFields)
         
         stackViewTextFields.anchor(
-            top: stackViewLogo.bottomAnchor,
+            top: stackViewPhoto.bottomAnchor,
             left: leftAnchor,
             right: rightAnchor
         )
         
-        let stackViewSignUp = UIStackView()
-        stackViewSignUp.addArrangedSubview(signUpButton)
-        stackViewSignUp.distribution = .fillEqually
-        addSubview(stackViewSignUp)
+        let stackViewLogIn = UIStackView()
+        stackViewLogIn.addArrangedSubview(haveAccountButton)
+        stackViewLogIn.distribution = .fillEqually
+        addSubview(stackViewLogIn)
         
-        stackViewSignUp.anchor(
+        stackViewLogIn.anchor(
             left: leftAnchor,
             bottom: safeAreaLayoutGuide.bottomAnchor,
             right: rightAnchor
@@ -129,21 +171,21 @@ class LoginView: UIView {
     @objc func validateTextField() {
         if let email = emailTextField.text, let password = passwordTextField.text {
             if !email.isEmpty, !password.isEmpty {
-                delegate?.isValidLogin = true
+                delegate?.isValidSignUp = true
             } else {
-                delegate?.isValidLogin = false
+                delegate?.isValidSignUp = false
             }
         }
         
         delegate?.validate()
     }
     
-    @objc func tapSignUpLabel() {
-        print("view")
-        delegate?.signUp()
+    @objc func tapLoginLabel() {
+        delegate?.login()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @objc func tapButtonPhoto() {
+        delegate?.photoPicker()
     }
 }
+

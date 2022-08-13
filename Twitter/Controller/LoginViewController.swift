@@ -29,9 +29,9 @@ class LoginViewController: UIViewController {
         
         view.addSubview(loginView)
         loginView.anchor(
-            top: view.topAnchor,
+            top: view.safeAreaLayoutGuide.topAnchor,
             left: view.leftAnchor,
-            bottom: view.bottomAnchor,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor,
             right: view.rightAnchor,
             paddingLeft: 30,
             paddingRight: 30
