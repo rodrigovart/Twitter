@@ -14,6 +14,7 @@ protocol SignUpDelegate: AnyObject {
 }
 
 class SignUpView: UIView {
+    
     var delegate: SignUpViewController?
     
     lazy var imagePhoto: UIImageView = {
@@ -30,6 +31,7 @@ class SignUpView: UIView {
     
     lazy var emailTextField: SkyFloatingLabelTextFieldWithIcon = {
         let textField = SkyFloatingLabelTextFieldWithIcon()
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         textField.iconType = .image
         textField.placeholder = "Enter your Email"
         textField.placeholderColor = .white
@@ -46,6 +48,7 @@ class SignUpView: UIView {
     
     lazy var passwordTextField: SkyFloatingLabelTextFieldWithIcon = {
         let textField = SkyFloatingLabelTextFieldWithIcon()
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         textField.iconType = .image
         textField.placeholder = "Enter your Password"
         textField.placeholderColor = .white
@@ -63,6 +66,7 @@ class SignUpView: UIView {
     
     lazy var fullNameTextField: SkyFloatingLabelTextFieldWithIcon = {
         let textField = SkyFloatingLabelTextFieldWithIcon()
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         textField.iconType = .image
         textField.placeholder = "Enter your Full Name"
         textField.placeholderColor = .white
@@ -79,6 +83,7 @@ class SignUpView: UIView {
     
     lazy var userNameTextField: SkyFloatingLabelTextFieldWithIcon = {
         let textField = SkyFloatingLabelTextFieldWithIcon()
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         textField.iconType = .image
         textField.placeholder = "Enter your Username"
         textField.placeholderColor = .white
@@ -90,11 +95,10 @@ class SignUpView: UIView {
         textField.selectedLineColor = .white
         textField.disabledColor = .white
         textField.updateColors()
-        textField.isSecureTextEntry = true
         return textField
     }()
     
-    lazy var loginButton: UIButton = {
+    lazy var signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .twitterBlue
@@ -104,6 +108,7 @@ class SignUpView: UIView {
         button.layer.cornerRadius = 5
         button.anchor(height: 50)
         button.addTarget(self, action: #selector(validateTextField), for: .touchUpInside)
+        button.isEnabled = false
         return button
     }()
     
@@ -144,7 +149,7 @@ class SignUpView: UIView {
         stackViewTextFields.addArrangedSubview(passwordTextField)
         stackViewTextFields.addArrangedSubview(fullNameTextField)
         stackViewTextFields.addArrangedSubview(userNameTextField)
-        stackViewTextFields.addArrangedSubview(loginButton)
+        stackViewTextFields.addArrangedSubview(signUpButton)
         stackViewTextFields.axis = .vertical
         stackViewTextFields.spacing = 10
         stackViewTextFields.distribution = .fillEqually
@@ -169,14 +174,6 @@ class SignUpView: UIView {
     }
     
     @objc func validateTextField() {
-        if let email = emailTextField.text, let password = passwordTextField.text {
-            if !email.isEmpty, !password.isEmpty {
-                delegate?.isValidSignUp = true
-            } else {
-                delegate?.isValidSignUp = false
-            }
-        }
-        
         delegate?.validate()
     }
     
@@ -189,3 +186,27 @@ class SignUpView: UIView {
     }
 }
 
+
+extension SignUpView {
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        signUpButton.isEnabled = false
+        
+        if let email = emailTextField.text, email.isEmpty {
+            return
+        }
+        
+        if let password = passwordTextField.text, password.isEmpty {
+            return
+        }
+        
+        if let fullName = fullNameTextField.text, fullName.isEmpty {
+            return
+        }
+        
+        if let userName = userNameTextField.text, userName.isEmpty {
+            return
+        }
+        
+        signUpButton.isEnabled = true
+    }
+}

@@ -9,8 +9,9 @@ import UIKit
 
 class SignUpViewController: UIViewController {
     
+    let viewModel = SignUpViewModel()
     let imagePicker = UIImagePickerController()
-    var isValidSignUp = false
+    var signUp = SignUp()
     
     lazy var signUpView: SignUpView = {
         let view = SignUpView()
@@ -21,6 +22,7 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel.delegate = self
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         setupUI()
@@ -40,12 +42,21 @@ class SignUpViewController: UIViewController {
             paddingRight: 30
         )
     }
+    
+    func getValuesForRegister() -> SignUp {
+        if let email = signUpView.emailTextField.text, let password = signUpView.passwordTextField.text,
+           let name = signUpView.fullNameTextField.text, let user = signUpView.userNameTextField.text {
+            return SignUp(email: email, password: password, name: name, user: user)
+        }
+        
+        return signUp
+    }
 }
 
 extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
-
+        
         dismiss(animated: true) {
             let photo = image.withRenderingMode(.alwaysOriginal).resize(CGSize(width: 150, height: 150))
             self.signUpView.imagePhoto.image = photo.withRoundedCorners(image.size.width)
@@ -60,14 +71,12 @@ extension SignUpViewController: SignUpDelegate {
     }
     
     func validate() {
-        if isValidSignUp {
-            let controller = MainTabBarController()
-            controller.modalPresentationStyle = .fullScreen
-            present(controller, animated: true, completion: nil)
-            return
-        }
-        
-        showMessage("Preencha todos os campos!", "", "🤔", .warning)
+        let values = getValuesForRegister()
+        viewModel.registerUser(values)
+                    let controller = MainTabBarController()
+                    controller.modalPresentationStyle = .fullScreen
+                    present(controller, animated: true, completion: nil)
+        return
     }
     
     func login() {
@@ -75,5 +84,12 @@ extension SignUpViewController: SignUpDelegate {
         controller.modalPresentationStyle = .fullScreen
         present(controller, animated: true, completion: nil)
         return
+    }
+}
+
+
+extension SignUpViewController {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }

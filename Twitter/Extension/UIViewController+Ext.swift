@@ -5,12 +5,11 @@
 //  Created by Rodrigo Vart on 12/08/22.
 //
 
-import UIKit
 import SwiftMessages
 
 extension UIViewController {
     func showMessage (_ title: String, _ body: String, _ iconText: String, _ theme: Theme) {
-        let view = MessageView.viewFromNib(layout: .cardView)
+        let view = MessageView.viewFromNib(layout: .messageView)
         view.configureTheme(theme)
         view.configureDropShadow()
         view.configureContent(title: title, body: body, iconText: iconText)
