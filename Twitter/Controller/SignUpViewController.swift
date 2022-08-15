@@ -11,8 +11,7 @@ class SignUpViewController: UIViewController {
     
     let viewModel = SignUpViewModel()
     let imagePicker = UIImagePickerController()
-    var signUp = SignUp()
-    
+
     lazy var signUpView: SignUpView = {
         let view = SignUpView()
         view.delegate = self
@@ -45,11 +44,11 @@ class SignUpViewController: UIViewController {
     
     func getValuesForRegister() -> SignUp {
         if let email = signUpView.emailTextField.text, let password = signUpView.passwordTextField.text,
-           let name = signUpView.fullNameTextField.text, let user = signUpView.userNameTextField.text {
-            return SignUp(email: email, password: password, name: name, user: user)
+           let name = signUpView.fullNameTextField.text, let user = signUpView.userNameTextField.text, let image = signUpView.imagePhoto.image {
+            return SignUp(email: email, password: password, name: name, user: user, image: image)
         }
         
-        return signUp
+        return SignUp()
     }
 }
 
@@ -71,11 +70,11 @@ extension SignUpViewController: SignUpDelegate {
     }
     
     func validate() {
-        let values = getValuesForRegister()
-        viewModel.registerUser(values)
-                    let controller = MainTabBarController()
-                    controller.modalPresentationStyle = .fullScreen
-                    present(controller, animated: true, completion: nil)
+        viewModel.valuesUser = getValuesForRegister()
+        viewModel.registerUser()
+        let controller = MainTabBarController()
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true, completion: nil)
         return
     }
     

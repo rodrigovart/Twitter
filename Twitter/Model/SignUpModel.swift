@@ -8,8 +8,19 @@
 import UIKit
 
 struct SignUp {
-    var email: String = ""
-    var password: String = ""
-    var name: String = ""
-    var user: String = ""
+    var uid: String
+    var email: String
+    var password: String
+    var name: String
+    var user: String
+    var image: UIImage?
+    
+    init(uid: String = "", email: String = "", password: String = "", name: String = "", user: String = "", image: UIImage? = nil) {
+        self.uid = uid
+        self.email = email
+        self.password = password
+        self.name = name
+        self.user = user
+        self.image = image
+    }
 }
