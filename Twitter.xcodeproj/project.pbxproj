@@ -11,6 +11,7 @@
 		9D2C0BA328A84738006770EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D2C0BA228A84738006770EE /* GoogleService-Info.plist */; };
 		9D2C0BA528A874F2006770EE /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C0BA428A874F2006770EE /* SignUpViewModel.swift */; };
 		9D2C0BA728A88146006770EE /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C0BA628A88146006770EE /* SignUpModel.swift */; };
+		9D83158128AEAFBA00AB883D /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D83158028AEAFBA00AB883D /* UserAPI.swift */; };
 		9DB554C628A69CDF004FD3DC /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB554C528A69CDF004FD3DC /* UIButton+Ext.swift */; };
 		9DB554C828A6A505004FD3DC /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB554C728A6A505004FD3DC /* SignUpView.swift */; };
 		9DE467F028A4237100990F42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE467EF28A4237100990F42 /* AppDelegate.swift */; };
@@ -37,6 +38,7 @@
 		9D2C0BA228A84738006770EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9D2C0BA428A874F2006770EE /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		9D2C0BA628A88146006770EE /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
+		9D83158028AEAFBA00AB883D /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		9DB554C528A69CDF004FD3DC /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
 		9DB554C728A6A505004FD3DC /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		9DE467EC28A4237100990F42 /* Twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +141,7 @@
 		9DE4680628A423D100990F42 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				9D83158028AEAFBA00AB883D /* UserAPI.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				9DE467F028A4237100990F42 /* AppDelegate.swift in Sources */,
 				9DE4681A28A57DE700990F42 /* UIView+Ext.swift in Sources */,
 				9D2C0B9228A80150006770EE /* UIImage+Ext.swift in Sources */,
+				9D83158128AEAFBA00AB883D /* UserAPI.swift in Sources */,
 				9DEE58CD28A67FE1006377C3 /* UIViewController+Ext.swift in Sources */,
 				9D2C0BA528A874F2006770EE /* SignUpViewModel.swift in Sources */,
 				9DB554C628A69CDF004FD3DC /* UIButton+Ext.swift in Sources */,

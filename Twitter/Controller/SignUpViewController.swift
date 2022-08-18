@@ -15,6 +15,7 @@ class SignUpViewController: UIViewController {
     lazy var signUpView: SignUpView = {
         let view = SignUpView()
         view.delegate = self
+        view.mock()
         return view
     }()
     
@@ -72,9 +73,9 @@ extension SignUpViewController: SignUpDelegate {
     func validate() {
         viewModel.valuesUser = getValuesForRegister()
         viewModel.registerUser()
-        let controller = MainTabBarController()
-        controller.modalPresentationStyle = .fullScreen
-        present(controller, animated: true, completion: nil)
+//        let controller = MainTabBarController()
+//        controller.modalPresentationStyle = .fullScreen
+//        present(controller, animated: true, completion: nil)
         return
     }
     

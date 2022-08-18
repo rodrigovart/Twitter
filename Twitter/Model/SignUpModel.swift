@@ -23,4 +23,9 @@ struct SignUp {
         self.user = user
         self.image = image
     }
+    
+    func userInfoToSign() -> [AnyHashable : Any] {
+        let keys: [AnyHashable : Any] = ["email": self.email, "password": self.password, "fullname": self.name, "username": self.user]
+        return keys
+    }
 }

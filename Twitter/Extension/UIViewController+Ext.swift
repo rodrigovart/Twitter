@@ -19,5 +19,6 @@ extension UIViewController {
         var config = SwiftMessages.defaultConfig
         config.duration = .seconds(seconds: 1)
         SwiftMessages.show(config: config, view: view)
+        return
     }
 }

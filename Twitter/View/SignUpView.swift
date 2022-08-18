@@ -210,3 +210,15 @@ extension SignUpView {
         signUpButton.isEnabled = true
     }
 }
+
+extension SignUpView {
+    func mock() {
+        let random = Int.random(in: 1..<100)
+        emailTextField.text = "teste\(random)@teste.com"
+        passwordTextField.text = "123456"
+        fullNameTextField.text = "Teste Teste"
+        userNameTextField.text = "teste\(random)"
+        signUpButton.isEnabled = true
+    }
+}
+
