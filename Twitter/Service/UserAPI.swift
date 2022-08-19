@@ -7,6 +7,7 @@
 
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
 
 class UserAPI {
     var valuesUser = SignUp()
@@ -26,6 +27,28 @@ class UserAPI {
                     completion(result.user.uid, false)
                 }
             }
+        }
+    }
+    
+    
+    func saveImage() {
+        Storage.storage().reference().child("profile_image").child("image").putData(valuesUser.image_data, metadata: nil) { (meta, error) in
+            
+            if let error = error {
+                print("ERROR: \(error.localizedDescription)")
+                return
+            }
+            
+//            storage.downloadURL { url, error in
+//                if let error = error {
+//                    print("ERROR: \(error.localizedDescription)")
+//                    return
+//                }
+//
+//                guard let imageUrl = url?.absoluteString else { return }
+//                self.valuesUser.imageUrl = imageUrl
+//                print("USER DATA: \(self.valuesUser)")
+//            }
         }
     }
     

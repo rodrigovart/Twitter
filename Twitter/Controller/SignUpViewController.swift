@@ -5,10 +5,11 @@
 //  Created by Rodrigo Vart on 11/08/22.
 //
 
-import UIKit
+import RxSwift
 
 class SignUpViewController: UIViewController {
     
+    let disposeBag = DisposeBag()
     let viewModel = SignUpViewModel()
     let imagePicker = UIImagePickerController()
 
@@ -71,8 +72,14 @@ extension SignUpViewController: SignUpDelegate {
     }
     
     func validate() {
-        viewModel.valuesUser = getValuesForRegister()
-        viewModel.registerUser()
+        viewModel.bindUserData(getValuesForRegister())
+            .subscribe (onError: { _ in
+                self.showMessage("Error", "", "", .error)
+            }, onCompleted: {
+                self.viewModel.registerUser()
+            }).disposed(by: disposeBag)
+
+       
 //        let controller = MainTabBarController()
 //        controller.modalPresentationStyle = .fullScreen
 //        present(controller, animated: true, completion: nil)

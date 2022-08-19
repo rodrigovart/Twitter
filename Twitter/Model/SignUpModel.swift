@@ -14,6 +14,19 @@ struct SignUp {
     var name: String
     var user: String
     var image: UIImage?
+    var imageUrl: String?
+    
+    var image_name: String {
+        return NSUUID().uuidString
+    }
+    
+    var image_data: Data {
+        if let image = image {
+            return image.jpegData(compressionQuality: 0.3)!
+        }
+        
+        return Data()
+    }
     
     init(uid: String = "", email: String = "", password: String = "", name: String = "", user: String = "", image: UIImage? = nil) {
         self.uid = uid

@@ -5,15 +5,24 @@
 //  Created by Rodrigo Vart on 13/08/22.
 //
 
-import UIKit
+import RxSwift
 import SwiftMessages
 
 class SignUpViewModel {
     var delegate:SignUpViewController?
     var valuesUser = SignUp()
+    var userAPI = UserAPI(nil)
+    
+    func bindUserData(_ data: SignUp) -> Observable<Void> {
+        userAPI = UserAPI(data)
+        valuesUser = data
+        return Observable.empty()
+    }
     
     func registerUser() {
-        UserAPI(valuesUser).auth() { [weak self] (str, error) in
+        userAPI.saveImage()
+        
+        userAPI.auth() { [weak self] (str, error) in
             guard let self = self else { return }
             if !error {
                 self.valuesUser.uid = str
@@ -25,7 +34,7 @@ class SignUpViewModel {
     }
     
     func saveUser() {
-        UserAPI(valuesUser).saveUser() { [weak self] (str, error) in
+        userAPI.saveUser() { [weak self] (str, error) in
             guard let self = self else { return }
             if error {
                 self.delegate?.showMessage(str, "", "", .warning)

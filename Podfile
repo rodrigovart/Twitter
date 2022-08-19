@@ -8,6 +8,7 @@ target 'Twitter' do
   # Pods for Twitter
   pod 'SwiftMessages'
   pod 'SkyFloatingLabelTextField'
+  pod 'RxSwift'
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Database'

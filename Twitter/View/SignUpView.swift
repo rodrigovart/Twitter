@@ -218,6 +218,11 @@ extension SignUpView {
         passwordTextField.text = "123456"
         fullNameTextField.text = "Teste Teste"
         userNameTextField.text = "teste\(random)"
+        imagePhoto.image = UIImage(named: "palhaco")!.withRenderingMode(.alwaysOriginal).resize(CGSize(width: 150, height: 150))
+        if let image = imagePhoto.image {
+            imagePhoto.image = image.withRoundedCorners(image.size.width)
+            layoutIfNeeded()
+        }
         signUpButton.isEnabled = true
     }
 }
