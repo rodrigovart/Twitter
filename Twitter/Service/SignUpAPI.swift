@@ -1,5 +1,5 @@
 //
-//  UserAPI.swift
+//  SignUpAPI.swift
 //  Twitter
 //
 //  Created by Rodrigo Vart on 18/08/22.
@@ -9,7 +9,12 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 
-class UserAPI {
+public let DB_REF = Database.database().reference()
+public let REF_USERS = DB_REF.child("users")
+public let STORAGE_REF = Storage.storage().reference()
+public let STORAGE_PROFILE_IMAGES = STORAGE_REF.child("profile_images")
+
+class SignUpAPI {
     var valuesUser = SignUp()
     
     public init(_ valuesUser: SignUp?) {
@@ -32,28 +37,30 @@ class UserAPI {
     
     
     func saveImage() {
-        Storage.storage().reference().child("profile_image").child("image").putData(valuesUser.image_data, metadata: nil) { (meta, error) in
+        let storageRef = STORAGE_PROFILE_IMAGES.child(valuesUser.image_name)
+        
+        storageRef.putData(valuesUser.image_data, metadata: nil) { (meta, error) in
             
             if let error = error {
                 print("ERROR: \(error.localizedDescription)")
                 return
             }
             
-//            storage.downloadURL { url, error in
-//                if let error = error {
-//                    print("ERROR: \(error.localizedDescription)")
-//                    return
-//                }
-//
-//                guard let imageUrl = url?.absoluteString else { return }
-//                self.valuesUser.imageUrl = imageUrl
-//                print("USER DATA: \(self.valuesUser)")
-//            }
+            storageRef.downloadURL { url, error in
+                if let error = error {
+                    print("ERROR: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let imageUrl = url?.absoluteString else { return }
+                self.valuesUser.imageUrl = imageUrl
+                print("USER DATA: \(self.valuesUser)")
+            }
         }
     }
     
     func saveUser(completion: @escaping (String, Bool) -> Void) {
-        Database.database().reference().child("users").child(valuesUser.uid).updateChildValues(valuesUser.userInfoToSign()) { (error, ref) in
+        REF_USERS.child(valuesUser.uid).updateChildValues(valuesUser.userInfoToSign()) { (error, ref) in
             if let error = error {
                 completion(error.localizedDescription, true)
                 return

@@ -11,10 +11,10 @@ import SwiftMessages
 class SignUpViewModel {
     var delegate:SignUpViewController?
     var valuesUser = SignUp()
-    var userAPI = UserAPI(nil)
+    var userAPI = SignUpAPI(nil)
     
     func bindUserData(_ data: SignUp) -> Observable<Void> {
-        userAPI = UserAPI(data)
+        userAPI = SignUpAPI(data)
         valuesUser = data
         return Observable.empty()
     }
