@@ -6,13 +6,6 @@
 //
 
 import FirebaseAuth
-import FirebaseDatabase
-import FirebaseStorage
-
-public let DB_REF = Database.database().reference()
-public let REF_USERS = DB_REF.child("users")
-public let STORAGE_REF = Storage.storage().reference()
-public let STORAGE_PROFILE_IMAGES = STORAGE_REF.child("profile_images")
 
 class SignUpAPI {
     var valuesUser = SignUp()
@@ -37,7 +30,7 @@ class SignUpAPI {
     
     
     func saveImage() {
-        let storageRef = STORAGE_PROFILE_IMAGES.child(valuesUser.image_name)
+        let storageRef = STORAGE_PROFILE_IMAGES_REFERENCE.child(valuesUser.image_name)
         
         storageRef.putData(valuesUser.image_data, metadata: nil) { (meta, error) in
             
@@ -60,7 +53,7 @@ class SignUpAPI {
     }
     
     func saveUser(completion: @escaping (String, Bool) -> Void) {
-        REF_USERS.child(valuesUser.uid).updateChildValues(valuesUser.userInfoToSign()) { (error, ref) in
+        DATABASE_USERS_REFERENCE.child(valuesUser.uid).updateChildValues(valuesUser.userInfoToSign()) { (error, ref) in
             if let error = error {
                 completion(error.localizedDescription, true)
                 return
