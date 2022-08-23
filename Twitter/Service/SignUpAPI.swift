@@ -6,9 +6,17 @@
 //
 
 import FirebaseAuth
+import RxSwift
+
+struct Error {
+    var error: Bool = false
+    var string: String = ""
+}
 
 class SignUpAPI {
+    let disposeBag = DisposeBag()
     var valuesUser = SignUp()
+    var error = Error()
     
     public init(_ valuesUser: SignUp?) {
         if let valuesUser = valuesUser {
@@ -16,50 +24,45 @@ class SignUpAPI {
         }
     }
     
-    func auth(completion: @escaping (String, Bool) -> Void) {
-        Auth.auth().createUser(withEmail: valuesUser.email, password: valuesUser.password) { (result, error) in
+    private func auth() {
+        Auth.auth().createUser(withEmail: self.valuesUser.email, password: self.valuesUser.password) { (result, error) in
             if let error = error {
-                completion(error.localizedDescription, true)
+                print(error.localizedDescription)
+                self.error = Error(error: true, string: error.localizedDescription)
             } else {
                 if let result = result, !result.user.uid.isEmpty {
-                    completion(result.user.uid, false)
+                    self.valuesUser.uid = result.user.uid
+                    print(self.valuesUser.userInfoToSign())
+                    DATABASE_USERS_REFERENCE.child(result.user.uid).updateChildValues(self.valuesUser.userInfoToSign())
                 }
             }
         }
     }
     
-    
-    func saveImage() {
-        let storageRef = STORAGE_PROFILE_IMAGES_REFERENCE.child(valuesUser.image_name)
+    private func saveImage() {
+        let storageRef = STORAGE_PROFILE_IMAGES_REFERENCE.child(self.valuesUser.image_name)
         
-        storageRef.putData(valuesUser.image_data, metadata: nil) { (meta, error) in
+        storageRef.putData(self.valuesUser.image_data, metadata: nil) { (meta, error) in
             
             if let error = error {
-                print("ERROR: \(error.localizedDescription)")
-                return
+                self.error = Error(error: true, string: error.localizedDescription)
             }
             
             storageRef.downloadURL { url, error in
                 if let error = error {
-                    print("ERROR: \(error.localizedDescription)")
-                    return
+                    self.error = Error(error: true, string: error.localizedDescription)
                 }
                 
                 guard let imageUrl = url?.absoluteString else { return }
                 self.valuesUser.imageUrl = imageUrl
-                print("USER DATA: \(self.valuesUser)")
+                self.auth()
             }
         }
     }
-    
-    func saveUser(completion: @escaping (String, Bool) -> Void) {
-        DATABASE_USERS_REFERENCE.child(valuesUser.uid).updateChildValues(valuesUser.userInfoToSign()) { (error, ref) in
-            if let error = error {
-                completion(error.localizedDescription, true)
-                return
-            } else {
-                completion(ref.description(), false)
-            }
-        }
+
+    func saveUser() -> Observable<Void> {
+        saveImage()
+        
+        return Observable.empty()
     }
 }

@@ -20,26 +20,21 @@ class SignUpViewModel {
     }
     
     func registerUser() {
-        userAPI.saveImage()
-        
-        userAPI.auth() { [weak self] (str, error) in
+        userAPI.saveUser().subscribe { [weak self] str in
             guard let self = self else { return }
-            if !error {
-                self.valuesUser.uid = str
-                self.saveUser()
-            } else {
-                self.delegate?.showMessage(str, "", "", .warning)
-            }
-        }
-    }
-    
-    func saveUser() {
-        userAPI.saveUser() { [weak self] (str, error) in
+            print(str)
+        } onError: { [weak self] error in
             guard let self = self else { return }
-            if error {
-                self.delegate?.showMessage(str, "", "", .warning)
-                return
-            }
+            print(error)
         }
+//        userAPI.auth() { [weak self] (str, error) in
+//            guard let self = self else { return }
+//            if !error {
+//                self.valuesUser.uid = str
+//                self.saveUser()
+//            } else {
+//                self.delegate?.showMessage(str, "", "", .warning)
+//            }
+//        }
     }
 }
