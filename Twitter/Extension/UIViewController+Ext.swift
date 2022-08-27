@@ -33,16 +33,34 @@ extension UIViewController {
         ProgressHUD.dismiss()
     }
     
-    func login(with email: String, password: String, completion: @escaping(User) -> Void) {
+    func showHome() {
         showLoader()
-        Auth.auth().signIn(withEmail: email, password: password) { (resut, error) in
-            if let error = error {
-                self.showMessage("Error", error.localizedDescription, "", .error)
-                self.dismissLoader()
-            }
-            
-            guard let user = resut?.user else { return }
-            completion(user)
+        let controller = MainTabBarController()
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true) {
+            self.dismissLoader()
+            return
+        }
+    }
+    
+   func showLogin() {
+       showLoader()
+       let controller = LoginViewController()
+       controller.modalPresentationStyle = .fullScreen
+       present(controller, animated: true) {
+           self.logout()
+           self.dismissLoader()
+           return
+       }
+    }
+    
+    func showSignUp() {
+        showLoader()
+        let controller = SignUpViewController()
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true) {
+            self.dismissLoader()
+            return
         }
     }
     

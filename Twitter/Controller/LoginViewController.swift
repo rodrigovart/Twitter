@@ -9,6 +9,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    let viewModel = LoginViewModel()
+    
     lazy var loginView: LoginView = {
         let view = LoginView()
         view.delegate = self
@@ -21,6 +23,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel.delegate = self
         setupUI()
     }
     
@@ -43,14 +46,8 @@ class LoginViewController: UIViewController {
 extension LoginViewController: LoginDelegate {
     func validate() {
         if isValidLogin {
-            login(with: loginView.emailTextField.text!, password: loginView.passwordTextField.text!, completion: { [weak self] user in
-                guard let self = self else { return }
-                let controller = MainTabBarController()
-                controller.modalPresentationStyle = .fullScreen
-                self.present(controller, animated: true) {
-                    self.dismissLoader()
-                }
-            })
+            showLoader()
+            viewModel.login(with: loginView.emailTextField.text!, password: loginView.passwordTextField.text!)
         } else {
             showMessage("Preencha todos os campos!", "", "🤔", .warning)
         }
@@ -58,11 +55,6 @@ extension LoginViewController: LoginDelegate {
     
     func signUp() {
         showLoader()
-        let controller = SignUpViewController()
-        controller.modalPresentationStyle = .fullScreen
-        present(controller, animated: true) {
-            self.dismissLoader()
-        }
-        return
+        showSignUp()
     }
 }

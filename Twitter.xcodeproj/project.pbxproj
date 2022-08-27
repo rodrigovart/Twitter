@@ -14,6 +14,7 @@
 		9D2CA3BF28B53C280020887B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2CA3BE28B53C280020887B /* Constants.swift */; };
 		9DB554C628A69CDF004FD3DC /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB554C528A69CDF004FD3DC /* UIButton+Ext.swift */; };
 		9DB554C828A6A505004FD3DC /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB554C728A6A505004FD3DC /* SignUpView.swift */; };
+		9DD9B18B28B9C35300B7D266 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD9B18A28B9C35300B7D266 /* LoginViewModel.swift */; };
 		9DE467F028A4237100990F42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE467EF28A4237100990F42 /* AppDelegate.swift */; };
 		9DE467F228A4237100990F42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE467F128A4237100990F42 /* SceneDelegate.swift */; };
 		9DE467F728A4237100990F42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DE467F528A4237100990F42 /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 		9D2CA3BE28B53C280020887B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9DB554C528A69CDF004FD3DC /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
 		9DB554C728A6A505004FD3DC /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		9DD9B18A28B9C35300B7D266 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		9DE467EC28A4237100990F42 /* Twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE467EF28A4237100990F42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DE467F128A4237100990F42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				9D2C0BA428A874F2006770EE /* SignUpViewModel.swift */,
+				9DD9B18A28B9C35300B7D266 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				9DE4680B28A424F500990F42 /* MainTabBarController.swift in Sources */,
 				9DE4681C28A58F9600990F42 /* LoginViewController.swift in Sources */,
 				9DE4681428A4278700990F42 /* MessageViewController.swift in Sources */,
+				9DD9B18B28B9C35300B7D266 /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

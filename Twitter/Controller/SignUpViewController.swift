@@ -17,7 +17,6 @@ class SignUpViewController: UIViewController {
     lazy var signUpView: SignUpView = {
         let view = SignUpView()
         view.delegate = self
-        view.mock()
         return view
     }()
     
@@ -70,13 +69,7 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
 
 extension SignUpViewController: SignUpDelegate {
     func login() {
-        showLoader()
-        let controller = LoginViewController()
-        controller.modalPresentationStyle = .fullScreen
-        present(controller, animated: true) {
-            self.logout()
-            self.dismissLoader()
-        }
+        showLogin()
     }
     
     func photoPicker() {
@@ -93,20 +86,10 @@ extension SignUpViewController: SignUpDelegate {
     }
     
     func goToFeed() {
-        showLoader()
         if Auth.auth().currentUser != nil {
-            let controller = MainTabBarController()
-            controller.modalPresentationStyle = .fullScreen
-            present(controller, animated: true) {
-                self.dismissLoader()
-            }
+           showHome()
         } else {
-            let controller = LoginViewController()
-            controller.modalPresentationStyle = .fullScreen
-            present(controller, animated: true) {
-                self.logout()
-                self.dismissLoader()
-            }
+            showLogin()
         }
     }
 }
