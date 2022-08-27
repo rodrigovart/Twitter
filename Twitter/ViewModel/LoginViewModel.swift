@@ -16,7 +16,6 @@ class LoginViewModel {
         Auth.auth().rx.signIn(withEmail: email, password: password)
             .subscribe(onNext: { [weak self] authResult in
                 guard let self = self else { return }
-                self.delegate?.userAuth = authResult
                 self.delegate?.showHome()
             }, onError: { [weak self] error in
                 guard let self = self else { return }

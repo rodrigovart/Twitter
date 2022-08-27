@@ -19,7 +19,6 @@ class LoginViewController: UIViewController {
     }()
     
     var isValidLogin = false
-    var userAuth: AuthDataResult?
     
     override func viewDidLoad() {
         super.viewDidLoad()

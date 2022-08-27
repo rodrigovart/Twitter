@@ -37,6 +37,17 @@ struct User {
         self.image = image
     }
     
+    init (data: [String: Any]) throws {
+        debugPrint(data)
+        self.uid = ""
+        self.email = try data["email"] as! String
+        self.password = ""
+        self.name = try data["fullname"] as! String
+        self.user = try data["username"] as! String
+        self.imageUrl = try data["image_url"] as? String
+        self.image = nil
+    }
+    
     func userInfoToSign() -> [String : Any] {
         var keys: [String : Any] = [:]
         
@@ -47,5 +58,9 @@ struct User {
         }
         
         return keys
+    }
+    
+    func userAuth() -> User {
+        return self
     }
 }
