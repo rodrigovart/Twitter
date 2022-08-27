@@ -37,8 +37,8 @@ struct SignUp {
         self.image = image
     }
     
-    func userInfoToSign() -> [AnyHashable : Any] {
-        var keys: [AnyHashable : Any] = [:]
+    func userInfoToSign() -> [String : Any] {
+        var keys: [String : Any] = [:]
         
         if let imageUrl = imageUrl {
             keys = ["email": self.email, "password": self.password, "fullname": self.name, "username": self.user, "image_url": imageUrl]

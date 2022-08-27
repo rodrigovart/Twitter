@@ -139,7 +139,6 @@ class LoginView: UIView {
     }
     
     @objc func tapSignUpLabel() {
-        print("view")
         delegate?.signUp()
     }
     

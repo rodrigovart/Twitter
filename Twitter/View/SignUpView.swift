@@ -213,16 +213,19 @@ extension SignUpView {
 
 extension SignUpView {
     func mock() {
-        let random = Int.random(in: 1..<100)
-        emailTextField.text = "teste\(random)@teste.com"
+        let random = Int.random(in: 1..<10000)
+//        emailTextField.text = "teste\(random)@teste.com"
+        emailTextField.text = "patrick\(random)@email.com"
         passwordTextField.text = "123456"
-        fullNameTextField.text = "Teste Teste"
-        userNameTextField.text = "teste\(random)"
-        imagePhoto.image = UIImage(named: "palhaco")!.withRenderingMode(.alwaysOriginal).resize(CGSize(width: 150, height: 150))
-        if let image = imagePhoto.image {
-            imagePhoto.image = image.withRoundedCorners(image.size.width)
-            layoutIfNeeded()
-        }
+//        fullNameTextField.text = "Teste Teste"
+        fullNameTextField.text = "Patrick Estrela"
+//        userNameTextField.text = "teste\(random)"
+        userNameTextField.text = "patrick_estrela"
+//        imagePhoto.image = UIImage(named: "palhaco")!.withRenderingMode(.alwaysOriginal).resize(CGSize(width: 150, height: 150))
+//        if let image = imagePhoto.image {
+//            imagePhoto.image = image.withRoundedCorners(image.size.width)
+//            layoutIfNeeded()
+//        }
         signUpButton.isEnabled = true
     }
 }

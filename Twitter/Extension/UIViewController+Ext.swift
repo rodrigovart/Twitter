@@ -6,6 +6,7 @@
 //
 
 import SwiftMessages
+import ProgressHUD
 
 extension UIViewController {
     func showMessage (_ title: String, _ body: String, _ iconText: String, _ theme: Theme) {
@@ -20,5 +21,14 @@ extension UIViewController {
         config.duration = .seconds(seconds: 1)
         SwiftMessages.show(config: config, view: view)
         return
+    }
+    
+    func showLoader() {
+        ProgressHUD.animationType = .circleSpinFade
+        ProgressHUD.show()
+    }
+    
+    func dismissLoader() {
+        ProgressHUD.dismiss()
     }
 }

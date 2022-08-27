@@ -52,9 +52,12 @@ extension LoginViewController: LoginDelegate {
     }
     
     func signUp() {
+        showLoader()
         let controller = SignUpViewController()
         controller.modalPresentationStyle = .fullScreen
-        present(controller, animated: true, completion: nil)
+        present(controller, animated: true) {
+            self.dismissLoader()
+        }
         return
     }
     

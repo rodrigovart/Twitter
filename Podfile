@@ -7,12 +7,14 @@ target 'Twitter' do
 
   # Pods for Twitter
   pod 'SwiftMessages'
+  pod 'ProgressHUD' 
   pod 'SkyFloatingLabelTextField'
   pod 'RxSwift'
-  pod 'Firebase/Auth'
-  pod 'Firebase/Core'
-  pod 'Firebase/Database'
-  pod 'Firebase/Storage'
-  pod 'Firebase/Firestore'
+  pod 'RxFirebase/Firestore'
+  pod 'RxFirebase/RemoteConfig'
+  pod 'RxFirebase/Database'
+  pod 'RxFirebase/Storage'
+  pod 'RxFirebase/Auth'
+  pod 'RxFirebase/Functions'
 
 end
