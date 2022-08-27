@@ -5,8 +5,8 @@
 //  Created by Rodrigo Vart on 11/08/22.
 //
 
-import RxSwift
 import FirebaseAuth
+import RxSwift
 
 class SignUpViewController: UIViewController {
     
@@ -69,6 +69,16 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
 }
 
 extension SignUpViewController: SignUpDelegate {
+    func login() {
+        showLoader()
+        let controller = LoginViewController()
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true) {
+            self.logout()
+            self.dismissLoader()
+        }
+    }
+    
     func photoPicker() {
         showLoader()
         present(imagePicker, animated: true) {
@@ -78,44 +88,24 @@ extension SignUpViewController: SignUpDelegate {
     
     func validate() {
         showLoader()
-        
         viewModel.bindUserData(getValuesForRegister())
         viewModel.createUser()
-        //            .subscribe (onNext: { [weak self] str in
-        //            guard let self = self else { return }
-        //            DispatchQueue.main.async {
-        //                print("RETURN FUNCTION: \(str)")
-        //                print(Auth.auth().currentUser?.email)
-        //                print(Auth.auth().currentUser?.displayName)
-        //                print("SIGNUP COMPLETED")
-        //                self.dismissLoader()
-        //            }
-        //        }, onError: { [weak self] error in
-        //            guard let self = self else { return }
-        //            self.showMessage("Error", "", "", .error)
-        //            self.dismissLoader()
-        //        }).disposed(by: disposeBag)
     }
     
     func goToFeed() {
+        showLoader()
         if Auth.auth().currentUser != nil {
             let controller = MainTabBarController()
             controller.modalPresentationStyle = .fullScreen
-            present(controller, animated: true, completion: nil)
-            return
+            present(controller, animated: true) {
+                self.dismissLoader()
+            }
         } else {
-            login()
-        }
-    }
-    
-    func login() {
-        let controller = LoginViewController()
-        controller.modalPresentationStyle = .fullScreen
-        present(controller, animated: true) {
-            do {
-                try Auth.auth().signOut()
-            } catch let error {
-                self.showMessage(error.localizedDescription, "", "", .error)
+            let controller = LoginViewController()
+            controller.modalPresentationStyle = .fullScreen
+            present(controller, animated: true) {
+                self.logout()
+                self.dismissLoader()
             }
         }
     }

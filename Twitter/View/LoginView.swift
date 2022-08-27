@@ -146,3 +146,10 @@ class LoginView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+extension LoginView {
+    func mock() {
+        emailTextField.text = "patrick6799@email.com"
+        passwordTextField.text = "123456"
+    }
+}

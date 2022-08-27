@@ -5,6 +5,7 @@
 //  Created by Rodrigo Vart on 12/08/22.
 //
 
+import FirebaseAuth
 import SwiftMessages
 import ProgressHUD
 
@@ -30,5 +31,26 @@ extension UIViewController {
     
     func dismissLoader() {
         ProgressHUD.dismiss()
+    }
+    
+    func login(with email: String, password: String, completion: @escaping(User) -> Void) {
+        showLoader()
+        Auth.auth().signIn(withEmail: email, password: password) { (resut, error) in
+            if let error = error {
+                self.showMessage("Error", error.localizedDescription, "", .error)
+                self.dismissLoader()
+            }
+            
+            guard let user = resut?.user else { return }
+            completion(user)
+        }
+    }
+    
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+        } catch let error {
+            self.showMessage("Error", error.localizedDescription, "", .error)
+        }
     }
 }
