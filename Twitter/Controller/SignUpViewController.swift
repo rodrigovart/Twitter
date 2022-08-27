@@ -44,13 +44,13 @@ class SignUpViewController: UIViewController {
         )
     }
     
-    func getValuesForRegister() -> SignUp {
+    func getValuesForRegister() -> User {
         if let email = signUpView.emailTextField.text, let password = signUpView.passwordTextField.text,
            let name = signUpView.fullNameTextField.text, let user = signUpView.userNameTextField.text, let image = signUpView.imagePhoto.image {
-            return SignUp(email: email, password: password, name: name, user: user, image: image)
+            return User(email: email, password: password, name: name, user: user, image: image)
         }
         
-        return SignUp()
+        return User()
     }
 }
 

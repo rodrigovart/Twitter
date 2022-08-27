@@ -5,7 +5,7 @@
 //  Created by Rodrigo Vart on 11/08/22.
 //
 
-import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
@@ -19,6 +19,7 @@ class LoginViewController: UIViewController {
     }()
     
     var isValidLogin = false
+    var userAuth: AuthDataResult?
     
     override func viewDidLoad() {
         super.viewDidLoad()

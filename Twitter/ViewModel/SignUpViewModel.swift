@@ -19,11 +19,11 @@ struct Error {
 
 class SignUpViewModel {
     var delegate: SignUpViewController?
-    var valuesUser = SignUp()
+    var valuesUser = User()
     let disposeBag = DisposeBag()
     var error = Error()
     
-    func bindUserData(_ data: SignUp) {
+    func bindUserData(_ data: User) {
         valuesUser = data
     }
     

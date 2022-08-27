@@ -1,23 +1,25 @@
 //
-//  LoginViewModel.swift
+//  FeedViewModel.swift
 //  Twitter
 //
 //  Created by Rodrigo Vart on 27/08/22.
 //
 
-import FirebaseAuth
+import Foundation
 import RxSwift
 
-class LoginViewModel {
+class FeedViewModel {
     let disposeBag = DisposeBag()
-    var delegate: LoginViewController?
-    
-    func login(with email: String, password: String) {
-        Auth.auth().rx.signIn(withEmail: email, password: password)
-            .subscribe(onNext: { [weak self] authResult in
+    var delegate: FeedViewController?
+
+    func fetchUser(_ uid: String) {
+        DATABASE_REFERENCE
+            .child(uid)
+            .rx
+            .observeSingleEvent(.value)
+            .subscribe(onSuccess: { [weak self] snapshot in
                 guard let self = self else { return }
-                self.delegate?.userAuth = authResult
-                self.delegate?.showHome()
+                debugPrint(snapshot)
             }, onError: { [weak self] error in
                 guard let self = self else { return }
                 self.delegate?.showMessage("Error", error.localizedDescription, "", .error)

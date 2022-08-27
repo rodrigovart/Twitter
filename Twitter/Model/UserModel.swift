@@ -1,5 +1,5 @@
 //
-//  SignUpModel.swift
+//  UserModel.swift
 //  Twitter
 //
 //  Created by Rodrigo Vart on 13/08/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct SignUp {
+struct User {
     var uid: String
     var email: String
     var password: String
