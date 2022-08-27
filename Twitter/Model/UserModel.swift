@@ -38,7 +38,6 @@ struct User {
     }
     
     init (data: [String: Any]) throws {
-        debugPrint(data)
         self.uid = ""
         self.email = try data["email"] as! String
         self.password = ""

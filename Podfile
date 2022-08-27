@@ -7,6 +7,7 @@ target 'Twitter' do
 
   # Pods for Twitter
   pod 'SwiftMessages'
+  pod 'SDWebImage'
   pod 'ProgressHUD' 
   pod 'SkyFloatingLabelTextField'
   pod 'RxSwift'

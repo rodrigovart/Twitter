@@ -36,7 +36,7 @@ class MainTabBarController: UITabBarController {
     
     func setupItensTabBar(controller: UIViewController, image: UIImage) -> UINavigationController {
         let nav = UINavigationController(rootViewController: controller)
-        nav.tabBarItem.image = image
+        nav.tabBarItem.image = image.tint(.darkGray)
         nav.navigationBar.barTintColor = .white
         return nav
     }

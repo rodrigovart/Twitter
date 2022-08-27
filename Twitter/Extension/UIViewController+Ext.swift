@@ -34,13 +34,9 @@ extension UIViewController {
     }
     
     func showHome() {
-        showLoader()
         let controller = MainTabBarController()
         controller.modalPresentationStyle = .fullScreen
-        present(controller, animated: true) {
-            self.dismissLoader()
-            return
-        }
+        present(controller, animated: true, completion: nil)
     }
     
    func showLogin() {

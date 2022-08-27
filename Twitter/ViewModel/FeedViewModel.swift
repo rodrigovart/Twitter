@@ -21,7 +21,7 @@ class FeedViewModel {
             .subscribe(onSuccess: { [weak self] snapshot in
                 guard let self = self else { return }
                 self.dictionary = snapshot.value
-                self.userAuth()
+                self.delegate?.user = self.userAuth()
             }, onError: { [weak self] error in
                 guard let self = self else { return }
                 self.delegate?.showMessage("Error", error.localizedDescription, "", .error)
@@ -31,7 +31,13 @@ class FeedViewModel {
     
     func userAuth() -> User {
         guard let user = dictionary as? [String: Any] else { return User() }
-        userLogged = User(data: user)
+        
+        do {
+            userLogged = try User(data: user)
+        } catch let error {
+            debugPrint(error)
+        }
+        
         return userLogged
     }
 }
