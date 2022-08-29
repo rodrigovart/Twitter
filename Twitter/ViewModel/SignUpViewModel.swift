@@ -52,7 +52,9 @@ class SignUpViewModel {
     }
     
     private func saveUser() {
-        DATABASE_REFERENCE.child(valuesUser.uid)
+        DATABASE_REFERENCE
+            .child(CHILD_USERS_NAME)
+            .child(valuesUser.uid)
             .rx
             .updateChildValues(valuesUser.userInfoToSign())
             .subscribe(onSuccess: { [weak self] ref in

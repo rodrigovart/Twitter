@@ -55,6 +55,6 @@ class MainTabBarController: UITabBarController {
     }
     
     @objc func newTweetTap() {
-        showLogin()
+        newTweet()
     }
 }

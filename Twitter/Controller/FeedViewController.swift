@@ -11,6 +11,7 @@ import UIKit
 
 class FeedViewController: UIViewController {
     let viewModel = FeedViewModel()
+    var tweet = Tweet()
     
     lazy var imageProfile: UIImageView = {
         let imageView = UIImageView()
@@ -27,6 +28,11 @@ class FeedViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.anchor(width: 32, height: 32)
         return imageView
+    }()
+    
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        return tableView
     }()
     
     var user: User? {
@@ -53,6 +59,13 @@ class FeedViewController: UIViewController {
         let imageView = UIImageView(image: UIImage(named: "twitter_logo_blue"))
         imageView.contentMode = .scaleAspectFit
         navigationItem.titleView = imageView
+        
+        tableView.register(FeedView.self, forCellReuseIdentifier: "cell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        view.addSubview(tableView)
+        tableView.addConstraintsToFillView(view)
     }
     
     func setupLeftImage() {
@@ -68,5 +81,28 @@ class FeedViewController: UIViewController {
     func fetchUserLogged() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         viewModel.fetchUser(uid)
+        viewModel.fechtTweets()
+    }
+}
+
+extension FeedViewController: UITableViewDelegate {}
+
+extension FeedViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? FeedView else { return UITableViewCell() }
+        cell.tweet = Tweet()
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 170
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 struct User {
     var uid: String
@@ -15,6 +16,7 @@ struct User {
     var user: String
     var image: UIImage?
     var imageUrl: String?
+    let defaults = UserDefaults.standard
     
     var image_name: String {
         return NSUUID().uuidString
@@ -35,16 +37,20 @@ struct User {
         self.name = name
         self.user = user
         self.image = image
+        
+        userDefaults()
     }
     
     init (data: [String: Any]) throws {
-        self.uid = ""
+        self.uid = Auth.auth().currentUser?.uid ?? ""
         self.email = try data["email"] as! String
         self.password = ""
         self.name = try data["fullname"] as! String
         self.user = try data["username"] as! String
         self.imageUrl = try data["image_url"] as? String
         self.image = nil
+        
+        userDefaults()
     }
     
     func userInfoToSign() -> [String : Any] {
@@ -61,5 +67,13 @@ struct User {
     
     func userAuth() -> User {
         return self
+    }
+    
+    func userDefaults() {
+        defaults.set(self.uid, forKey: "uid")
+        defaults.set(self.email, forKey: "email")
+        defaults.set(self.name, forKey: "fullname")
+        defaults.set(self.user, forKey: "username")
+        defaults.set(self.imageUrl, forKey: "image_url")
     }
 }

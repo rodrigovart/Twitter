@@ -33,6 +33,12 @@ extension UIViewController {
         ProgressHUD.dismiss()
     }
     
+    func newTweet() {
+        let nav = UINavigationController(rootViewController: TweetViewController())
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
+    }
+    
     func showHome() {
         let controller = MainTabBarController()
         controller.modalPresentationStyle = .fullScreen
