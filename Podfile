@@ -10,7 +10,6 @@ target 'Twitter' do
   pod 'SDWebImage'
   pod 'ProgressHUD' 
   pod 'SkyFloatingLabelTextField'
-  pod 'KMPlaceholderTextView'
   pod 'RxSwift'
   pod 'RxFirebase/Firestore'
   pod 'RxFirebase/RemoteConfig'

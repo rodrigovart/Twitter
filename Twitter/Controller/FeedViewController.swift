@@ -32,6 +32,9 @@ class FeedViewController: UIViewController {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
     
@@ -54,18 +57,18 @@ class FeedViewController: UIViewController {
     }
     
     func setupUI() {
-        view.backgroundColor = .white
-        
         let imageView = UIImageView(image: UIImage(named: "twitter_logo_blue"))
         imageView.contentMode = .scaleAspectFit
         navigationItem.titleView = imageView
         
         tableView.register(FeedView.self, forCellReuseIdentifier: "cell")
+        tableView.isUserInteractionEnabled = true
         tableView.delegate = self
         tableView.dataSource = self
         
         view.addSubview(tableView)
         tableView.addConstraintsToFillView(view)
+        tableView.reloadData()
     }
     
     func setupLeftImage() {
@@ -98,11 +101,27 @@ extension FeedViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? FeedView else { return UITableViewCell() }
+        cell.delegate = self
+        cell.tweetLike.tag = indexPath.row
         cell.tweet = Tweet()
         return cell
     }
+}
+
+extension FeedViewController: FeedViewDelegate {
+    func comment() {
+        print("comment")
+    }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 170
+    func retweet() {
+        print("retweet")
+    }
+    
+    func like() {
+        print("like")
+    }
+    
+    func share() {
+        print("share")
     }
 }

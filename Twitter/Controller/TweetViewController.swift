@@ -49,8 +49,6 @@ class TweetViewController: UIViewController {
     }
     
     func setupUI() {
-        view.backgroundColor = .white
-        
         if let url = defaults.string(forKey: "image_url") {
             tweetView.url_image = url
         }

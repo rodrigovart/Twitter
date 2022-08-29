@@ -7,7 +7,6 @@
 
 import UIKit
 import SDWebImage
-import KMPlaceholderTextView
 
 class TweetView: UIView {
     var delegate: TweetViewController?
