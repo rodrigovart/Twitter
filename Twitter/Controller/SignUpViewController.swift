@@ -14,7 +14,7 @@ class SignUpViewController: UIViewController {
     let viewModel = SignUpViewModel()
     let imagePicker = UIImagePickerController()
     
-    lazy var signUpView: SignUpView = {
+    private lazy var signUpView: SignUpView = {
         let view = SignUpView()
         view.delegate = self
         return view

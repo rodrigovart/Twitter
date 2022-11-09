@@ -9,6 +9,8 @@ import UIKit
 import SDWebImage
 
 class TweetView: UIView {
+    private let TWEET_NUMBER_OF_CHARACTERS = 140
+    
     var delegate: TweetViewController?
     
     var url_image: String? {
@@ -17,7 +19,7 @@ class TweetView: UIView {
         }
     }
     
-    lazy var imageProfile: UIImageView = {
+    private lazy var imageProfile: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
@@ -25,7 +27,7 @@ class TweetView: UIView {
         return imageView
     }()
     
-    lazy var tweetTextView: KMPlaceholderTextView = {
+    private lazy var tweetTextView: KMPlaceholderTextView = {
         let textView = KMPlaceholderTextView()
         textView.delegate = self
         textView.placeholder = "What's happening?"
@@ -38,7 +40,7 @@ class TweetView: UIView {
         return textView
     }()
     
-    lazy var countLettersLabel: UILabel = {
+    private lazy var countLettersLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = .twitterBlue
@@ -104,7 +106,7 @@ class TweetView: UIView {
 extension TweetView: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         guard let str = textView.text else { return }
-        let count = 140 - str.count
+        let count = TWEET_NUMBER_OF_CHARACTERS - str.count
         countLettersLabel.text = "\(count)"
     }
     
@@ -113,6 +115,6 @@ extension TweetView: UITextViewDelegate {
         if text.contains(UIPasteboard.general.string ?? "") {
             return false
         }
-        return str.count <= 140
+        return str.count < TWEET_NUMBER_OF_CHARACTERS
     }
 }

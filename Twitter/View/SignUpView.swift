@@ -17,7 +17,7 @@ class SignUpView: UIView {
     
     var delegate: SignUpViewController?
     
-    lazy var imagePhoto: UIImageView = {
+    private lazy var imagePhoto: UIImageView = {
         let imagePhoto = UIImageView()
         imagePhoto.translatesAutoresizingMaskIntoConstraints = false
         imagePhoto.isUserInteractionEnabled = true
@@ -29,7 +29,7 @@ class SignUpView: UIView {
         return imagePhoto
     }()
     
-    lazy var emailTextField: SkyFloatingLabelTextFieldWithIcon = {
+    private lazy var emailTextField: SkyFloatingLabelTextFieldWithIcon = {
         let textField = SkyFloatingLabelTextFieldWithIcon()
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         textField.iconType = .image
@@ -46,7 +46,7 @@ class SignUpView: UIView {
         return textField
     }()
     
-    lazy var passwordTextField: SkyFloatingLabelTextFieldWithIcon = {
+    private lazy var passwordTextField: SkyFloatingLabelTextFieldWithIcon = {
         let textField = SkyFloatingLabelTextFieldWithIcon()
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         textField.iconType = .image
@@ -64,7 +64,7 @@ class SignUpView: UIView {
         return textField
     }()
     
-    lazy var fullNameTextField: SkyFloatingLabelTextFieldWithIcon = {
+    private lazy var fullNameTextField: SkyFloatingLabelTextFieldWithIcon = {
         let textField = SkyFloatingLabelTextFieldWithIcon()
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         textField.iconType = .image
@@ -81,7 +81,7 @@ class SignUpView: UIView {
         return textField
     }()
     
-    lazy var userNameTextField: SkyFloatingLabelTextFieldWithIcon = {
+    private lazy var userNameTextField: SkyFloatingLabelTextFieldWithIcon = {
         let textField = SkyFloatingLabelTextFieldWithIcon()
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         textField.iconType = .image
@@ -98,7 +98,7 @@ class SignUpView: UIView {
         return textField
     }()
     
-    lazy var signUpButton: UIButton = {
+    private lazy var signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .twitterBlue
@@ -112,7 +112,7 @@ class SignUpView: UIView {
         return button
     }()
     
-    lazy var haveAccountButton: UIButton = {
+    private lazy var haveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .twitterBlue

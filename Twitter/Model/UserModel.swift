@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 import FirebaseAuth
 
 struct User {
@@ -41,13 +42,13 @@ struct User {
         userDefaults()
     }
     
-    init (data: [String: Any]) throws {
+    init (data: JSON) {
         self.uid = Auth.auth().currentUser?.uid ?? ""
-        self.email = try data["email"] as! String
+        self.email = data["email"].stringValue
         self.password = ""
-        self.name = try data["fullname"] as! String
-        self.user = try data["username"] as! String
-        self.imageUrl = try data["image_url"] as? String
+        self.name = data["fullname"].stringValue
+        self.user = data["username"].stringValue
+        self.imageUrl = data["image_url"].stringValue
         self.image = nil
         
         userDefaults()

@@ -15,7 +15,7 @@ protocol LoginDelegate: AnyObject {
 class LoginView: UIView {
     var delegate: LoginViewController?
     
-    lazy var logoImageView: UIImageView = {
+    private lazy var logoImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "TwitterLogo")
@@ -25,7 +25,7 @@ class LoginView: UIView {
         return image
     }()
     
-    lazy var emailTextField: SkyFloatingLabelTextFieldWithIcon = {
+    private lazy var emailTextField: SkyFloatingLabelTextFieldWithIcon = {
         let textField = SkyFloatingLabelTextFieldWithIcon()
         textField.iconType = .image
         textField.placeholder = "Enter your Email"
@@ -41,7 +41,7 @@ class LoginView: UIView {
         return textField
     }()
     
-    lazy var passwordTextField: SkyFloatingLabelTextFieldWithIcon = {
+    private lazy var passwordTextField: SkyFloatingLabelTextFieldWithIcon = {
         let textField = SkyFloatingLabelTextFieldWithIcon()
         textField.iconType = .image
         textField.placeholder = "Enter your Password"
@@ -58,7 +58,7 @@ class LoginView: UIView {
         return textField
     }()
     
-    lazy var loginButton: UIButton = {
+    private lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .twitterBlue
@@ -71,7 +71,7 @@ class LoginView: UIView {
         return button
     }()
     
-    lazy var signUpButton: UIButton = {
+    private lazy var signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .twitterBlue

@@ -11,7 +11,7 @@ class LoginViewController: UIViewController {
     
     let viewModel = LoginViewModel()
     
-    lazy var loginView: LoginView = {
+    private lazy var loginView: LoginView = {
         let view = LoginView()
         view.delegate = self
         view.mock()

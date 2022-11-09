@@ -8,8 +8,10 @@ target 'Twitter' do
   # Pods for Twitter
   pod 'SwiftMessages'
   pod 'SDWebImage'
-  pod 'ProgressHUD' 
+  pod 'ProgressHUD'
+  pod 'SwiftyJSON'
   pod 'SkyFloatingLabelTextField'
+  pod 'HideShowPasswordTextField', :git => 'https://github.com/Guidebook/HideShowPasswordTextField'
   pod 'RxSwift'
   pod 'RxFirebase/Firestore'
   pod 'RxFirebase/RemoteConfig'

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D11A948291A8A32009D6549 /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D11A947291A8A32009D6549 /* FeedService.swift */; };
 		9D2C0B9228A80150006770EE /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C0B9128A80150006770EE /* UIImage+Ext.swift */; };
 		9D2C0BA328A84738006770EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D2C0BA228A84738006770EE /* GoogleService-Info.plist */; };
 		9D2C0BA528A874F2006770EE /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2C0BA428A874F2006770EE /* SignUpViewModel.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9D11A947291A8A32009D6549 /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
 		9D2C0B9128A80150006770EE /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		9D2C0BA228A84738006770EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9D2C0BA428A874F2006770EE /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
@@ -96,6 +98,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		9D11A946291A8A11009D6549 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				9D11A947291A8A32009D6549 /* FeedService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		9D2CA3BD28B53C160020887B /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +134,7 @@
 		9DE467EE28A4237100990F42 /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
+				9D11A946291A8A11009D6549 /* Service */,
 				9D2CA3BD28B53C160020887B /* Constants */,
 				9DE4680728A423E000990F42 /* ViewModel */,
 				9DE4680428A423C300990F42 /* View */,
@@ -284,6 +295,7 @@
 				9DE4681628A435D500990F42 /* TabBarModel.swift in Sources */,
 				9D3D213828BA91120010617D /* TweetViewController.swift in Sources */,
 				9DE4681E28A5900600990F42 /* SignUpViewController.swift in Sources */,
+				9D11A948291A8A32009D6549 /* FeedService.swift in Sources */,
 				9D3D213C28BAA6E30010617D /* UITextView+Ext.swift in Sources */,
 				9DE467F228A4237100990F42 /* SceneDelegate.swift in Sources */,
 				9DE4681028A4274200990F42 /* ExploreViewController.swift in Sources */,

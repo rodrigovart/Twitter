@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 import FirebaseAuth
 
 struct Tweet {
@@ -26,13 +27,13 @@ struct Tweet {
         self.imageUrl = ""
     }
     
-    init (data: [String: Any]) throws {
-        self.uid = "1h0QYilc9kZ0b5fjssx73B2QNGm1"
-        self.time = try data["email"] as! Int
-        self.likes = try data["email"] as! Int
-        self.retweets = try data["fullname"] as! Int
-        self.content = try data["username"] as! String
-        self.imageUrl = try data["image_url"] as! String
+    init (data: JSON) {
+        self.uid = data["uid"].stringValue
+        self.time = data["time"].intValue
+        self.likes = data["likes"].intValue
+        self.retweets = data["retweets"].intValue
+        self.content = data["content"].stringValue
+        self.imageUrl = data["imageUrl"].stringValue
     }
     
     init () {
@@ -43,10 +44,10 @@ struct Tweet {
         self.content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non diam id magna dignissim porta. Etiam quis placerat diam, nec varius felis. Mauris in justo nec metus dictum vestibulum"
         self.imageUrl = defaults.string(forKey: "image_url") ?? ""
     }
-
+    
     func newTweetValues() -> [String : Any] {
         let keys: [String : Any] = ["uid": self.uid, "time": self.time, "likes": self.likes, "retweets": self.retweets, "content": self.content]
-
+        
         return keys
     }
 }

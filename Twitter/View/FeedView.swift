@@ -21,15 +21,10 @@ class FeedView: UITableViewCell {
     
     var buttonTapCallback: () -> () = { }
     
-    var tweet: Tweet? {
-        didSet {
-            if let tweet = tweet {
-//                tweetImage.sd_setImage(with: URL(string: tweet.uid), placeholderImage: UIImage(named: tweet.uid))
-            }
-        }
-    }
+    var tweet: Tweet?
+    var user: User?
     
-    lazy var tweetImage: UIImageView = {
+    private private lazy var tweetImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "palhaco")
@@ -38,22 +33,22 @@ class FeedView: UITableViewCell {
         return imageView
     }()
     
-    lazy var tweetName: UILabel = {
+    private private lazy var tweetName: UILabel = {
         let label = UILabel()
-        label.text = "Palhaço"
+        label.text = "Patrick Caowboy"
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = .darkGray
         return label
     }()
     
-    lazy var tweetUser: UILabel = {
+    private private lazy var tweetUser: UILabel = {
         let label = UILabel()
-        label.text = "@palhaco"
+        label.text = "@patrick"
         label.textColor = .darkGray
         return label
     }()
     
-    lazy var tweetPointSeparator: UIImageView = {
+    private private lazy var tweetPointSeparator: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "point")?.tint(.darkGray)
         imageView.anchor(width: 20, height: 10)
@@ -61,23 +56,22 @@ class FeedView: UITableViewCell {
         return imageView
     }()
     
-    lazy var tweetTime: UILabel = {
+    private private lazy var tweetTime: UILabel = {
         let label = UILabel()
         label.text = "1m"
         label.textColor = .darkGray
         return label
     }()
     
-    lazy var tweetContent: UILabel = {
+    private private lazy var tweetContent: UILabel = {
         let label = UILabel()
-        label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non diam id magna dignissim porta. Etiam quis placerat diam, nec varius felis. Mauris in justo nec metus dictum vestibulum"
         label.textColor = .darkGray
         label.numberOfLines = 10
         label.textAlignment = .justified
         return label
     }()
     
-    lazy var tweetComment: UIButton = {
+    private private lazy var tweetComment: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(commentTap), for: .touchUpInside)
@@ -87,7 +81,7 @@ class FeedView: UITableViewCell {
         return button
     }()
     
-    lazy var tweetRetweet: UIButton = {
+    private private lazy var tweetRetweet: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(retweetTap), for: .touchUpInside)
@@ -97,7 +91,7 @@ class FeedView: UITableViewCell {
         return button
     }()
     
-    lazy var tweetLike: UIButton = {
+    private private lazy var tweetLike: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isUserInteractionEnabled = true
@@ -108,7 +102,7 @@ class FeedView: UITableViewCell {
         return button
     }()
     
-    lazy var tweetShare: UIButton = {
+    private private lazy var tweetShare: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(shareTap), for: .touchUpInside)
@@ -124,7 +118,7 @@ class FeedView: UITableViewCell {
         setupUI()
     }
     
-    func setupUI() {
+    private func setupUI() {
         if let image = tweetImage.image {
             tweetImage.image = image.withRoundedCorners(image.size.width)
             tweetImage.layer.masksToBounds = true
@@ -153,12 +147,12 @@ class FeedView: UITableViewCell {
         stackView.spacing = 5
         stackView.axis = .horizontal
         
-        addSubview(stackView)
+        contentView.addSubview(stackView)
         
         stackView.anchor(
-            top: safeAreaLayoutGuide.topAnchor,
-            left: leftAnchor,
-            right: rightAnchor,
+            top: contentView.safeAreaLayoutGuide.topAnchor,
+            left: contentView.leftAnchor,
+            right: contentView.rightAnchor,
             paddingTop: 10,
             paddingLeft: 10,
             paddingRight: 10
@@ -169,12 +163,12 @@ class FeedView: UITableViewCell {
         stackViewContent.axis = .vertical
         stackViewContent.distribution = .fillEqually
 
-        addSubview(stackViewContent)
+        contentView.addSubview(stackViewContent)
 
         stackViewContent.anchor(
             top: stackViewUser.bottomAnchor,
-            left: leftAnchor,
-            right: rightAnchor,
+            left: contentView.leftAnchor,
+            right: contentView.rightAnchor,
             paddingTop: 2,
             paddingLeft: 65,
             paddingBottom: 10,
@@ -198,6 +192,8 @@ class FeedView: UITableViewCell {
         )
         
         let viewLike = UIView()
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(likeTap))
+        viewLike.addGestureRecognizer(tapGestureRecognizer)
         viewLike.addSubview(tweetLike)
         tweetLike.anchor(
             top: viewLike.topAnchor,
@@ -218,25 +214,30 @@ class FeedView: UITableViewCell {
         stackViewActions.addArrangedSubview(viewRetweet)
         stackViewActions.addArrangedSubview(viewLike)
         stackViewActions.addArrangedSubview(viewShare)
-        stackViewActions.addArrangedSubview(UIView())
         
         stackViewActions.axis = .horizontal
         stackViewActions.alignment = .leading
         stackViewActions.distribution = .fillEqually
 
-        addSubview(stackViewActions)
+        contentView.addSubview(stackViewActions)
 
         stackViewActions.anchor(
             top: stackViewContent.bottomAnchor,
-            left: leftAnchor,
-            bottom: bottomAnchor,
-            right: rightAnchor,
+            left: contentView.leftAnchor,
+            bottom: contentView.bottomAnchor,
+            right: contentView.rightAnchor,
             paddingTop: 10,
             paddingLeft: 65,
             paddingBottom: 10
         )
         
         selectionStyle = .none
+    }
+    
+    func configCell() {
+        guard let tweet = tweet, let user = user, let image = user.imageUrl else { return }
+        tweetImage.sd_setImage(with: URL(string: image), placeholderImage: UIImage(named: image))
+        tweetContent.text = tweet.content
     }
     
     required init?(coder: NSCoder) {
@@ -251,6 +252,14 @@ extension FeedView {
     }
     
     @objc func retweetTap() {
+        isRetweeted.toggle()
+        
+        if isRetweeted {
+            tweetRetweet.setImage(UIImage(named: "retweetar")?.tint(.systemMint), for: .normal)
+        } else {
+            tweetRetweet.setImage(UIImage(named: "retweetar")?.tint(.darkGray), for: .normal)
+        }
+        
         delegate?.retweet()
     }
     
@@ -263,7 +272,6 @@ extension FeedView {
             tweetLike.setImage(UIImage(named: "like")?.tint(.darkGray), for: .normal)
         }
         
-        delegate?.tableView.reloadData()
         delegate?.like()
     }
     

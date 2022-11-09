@@ -11,7 +11,7 @@ class TweetViewController: UIViewController {
     let viewModel = TweetViewModel()
     let defaults = UserDefaults.standard
     
-    lazy var leftButton: UIImageView = {
+    private lazy var leftButton: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "x")?.tint(.twitterBlue)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -22,7 +22,7 @@ class TweetViewController: UIViewController {
         return imageView
     }()
     
-    lazy var rightButton: UIButton = {
+    private lazy var rightButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setTitle("Tweet", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -35,7 +35,7 @@ class TweetViewController: UIViewController {
         return button
     }()
     
-    lazy var tweetView: TweetView = {
+    private lazy var tweetView: TweetView = {
         let view = TweetView()
         view.delegate = self
         return view
@@ -52,6 +52,8 @@ class TweetViewController: UIViewController {
         if let url = defaults.string(forKey: "image_url") {
             tweetView.url_image = url
         }
+    
+        view.backgroundColor = .white
         
         navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.isTranslucent = true

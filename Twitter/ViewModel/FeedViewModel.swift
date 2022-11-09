@@ -5,58 +5,23 @@
 //  Created by Rodrigo Vart on 27/08/22.
 //
 
-import RxSwift
+import UIKit
+import RxRelay
 
 class FeedViewModel {
-    let disposeBag = DisposeBag()
-    var delegate: FeedViewController?
-    var dictionary: Any?
-    var userLogged = User()
-    var tweets = Tweet()
+    var tweets: BehaviorRelay<[Tweet]> = BehaviorRelay(value: [Tweet]())
     
-    func fetchUser(_ uid: String) {
-        DATABASE_REFERENCE
-            .child(CHILD_USERS_NAME)
-            .child(uid)
-            .rx
-            .observeSingleEvent(.value)
-            .subscribe(onSuccess: { [weak self] snapshot in
-                guard let self = self else { return }
-                self.dictionary = snapshot.value
-                self.delegate?.user = self.userAuth()
-            }, onError: { [weak self] error in
-                guard let self = self else { return }
-                self.delegate?.showMessage("Error", error.localizedDescription, "", .error)
-                self.delegate?.dismissLoader()
-            }).disposed(by: disposeBag)
-    }
-    
-    func fechtTweets() {
-        print(tweets)
-        DATABASE_REFERENCE
-            .child(CHILD_TWEET_NAME)
-            .child(tweets.uid)
-            .rx
-            .observeSingleEvent(.childAdded)
-            .subscribe(onSuccess: { [weak self] snapshot in
-                guard let self = self else { return }
-                print(snapshot)
-            }, onError: { [weak self] error in
-                guard let self = self else { return }
-                self.delegate?.showMessage("Error", error.localizedDescription, "", .error)
-                self.delegate?.dismissLoader()
-            }).disposed(by: disposeBag)
-    }
-    
-    func userAuth() -> User {
-        guard let user = dictionary as? [String: Any] else { return User() }
-        
-        do {
-            userLogged = try User(data: user)
-        } catch let error {
-            debugPrint(error)
+    func rx_FetchUser(_ uid: String, completion: @escaping (User) -> Void) {
+        FeedService.shared.rx_FetchUser(uid) {[weak self] user in
+            guard let self = self else { return }
+            completion(user)
         }
-        
-        return userLogged
+    }
+    
+    func rx_FechtTweets(_ uid: String) {
+        FeedService.shared.rx_FechtTweets(uid) {[weak self] tweet in
+            guard let self = self else { return }
+            self.tweets.accept(tweet)
+        }
     }
 }
