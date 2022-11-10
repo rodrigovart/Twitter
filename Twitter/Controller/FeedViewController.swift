@@ -16,7 +16,7 @@ class FeedViewController: UIViewController {
     var user = User()
     var tweet = [Tweet]()
     
-    private private lazy var imageProfile: UIImageView = {
+    private lazy var imageProfile: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
@@ -24,7 +24,7 @@ class FeedViewController: UIViewController {
         return imageView
     }()
     
-    private private lazy var imageStars: UIImageView = {
+    private lazy var imageStars: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "stars")?.tint(.twitterBlue)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +33,7 @@ class FeedViewController: UIViewController {
         return imageView
     }()
     
-    private private lazy var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self

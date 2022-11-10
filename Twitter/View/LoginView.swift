@@ -25,7 +25,7 @@ class LoginView: UIView {
         return image
     }()
     
-    private lazy var emailTextField: SkyFloatingLabelTextFieldWithIcon = {
+    lazy var emailTextField: SkyFloatingLabelTextFieldWithIcon = {
         let textField = SkyFloatingLabelTextFieldWithIcon()
         textField.iconType = .image
         textField.placeholder = "Enter your Email"
@@ -41,7 +41,7 @@ class LoginView: UIView {
         return textField
     }()
     
-    private lazy var passwordTextField: SkyFloatingLabelTextFieldWithIcon = {
+    lazy var passwordTextField: SkyFloatingLabelTextFieldWithIcon = {
         let textField = SkyFloatingLabelTextFieldWithIcon()
         textField.iconType = .image
         textField.placeholder = "Enter your Password"

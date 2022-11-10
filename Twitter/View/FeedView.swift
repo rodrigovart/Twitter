@@ -24,7 +24,7 @@ class FeedView: UITableViewCell {
     var tweet: Tweet?
     var user: User?
     
-    private private lazy var tweetImage: UIImageView = {
+    private lazy var tweetImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "palhaco")
@@ -33,7 +33,7 @@ class FeedView: UITableViewCell {
         return imageView
     }()
     
-    private private lazy var tweetName: UILabel = {
+    private lazy var tweetName: UILabel = {
         let label = UILabel()
         label.text = "Patrick Caowboy"
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -41,14 +41,14 @@ class FeedView: UITableViewCell {
         return label
     }()
     
-    private private lazy var tweetUser: UILabel = {
+    private lazy var tweetUser: UILabel = {
         let label = UILabel()
         label.text = "@patrick"
         label.textColor = .darkGray
         return label
     }()
     
-    private private lazy var tweetPointSeparator: UIImageView = {
+    private lazy var tweetPointSeparator: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "point")?.tint(.darkGray)
         imageView.anchor(width: 20, height: 10)
@@ -56,14 +56,14 @@ class FeedView: UITableViewCell {
         return imageView
     }()
     
-    private private lazy var tweetTime: UILabel = {
+    private lazy var tweetTime: UILabel = {
         let label = UILabel()
         label.text = "1m"
         label.textColor = .darkGray
         return label
     }()
     
-    private private lazy var tweetContent: UILabel = {
+    private lazy var tweetContent: UILabel = {
         let label = UILabel()
         label.textColor = .darkGray
         label.numberOfLines = 10
@@ -71,7 +71,7 @@ class FeedView: UITableViewCell {
         return label
     }()
     
-    private private lazy var tweetComment: UIButton = {
+    private lazy var tweetComment: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(commentTap), for: .touchUpInside)
@@ -81,7 +81,7 @@ class FeedView: UITableViewCell {
         return button
     }()
     
-    private private lazy var tweetRetweet: UIButton = {
+    private lazy var tweetRetweet: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(retweetTap), for: .touchUpInside)
@@ -91,7 +91,7 @@ class FeedView: UITableViewCell {
         return button
     }()
     
-    private private lazy var tweetLike: UIButton = {
+    private lazy var tweetLike: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isUserInteractionEnabled = true
@@ -102,7 +102,7 @@ class FeedView: UITableViewCell {
         return button
     }()
     
-    private private lazy var tweetShare: UIButton = {
+    private lazy var tweetShare: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(shareTap), for: .touchUpInside)
@@ -175,49 +175,16 @@ class FeedView: UITableViewCell {
             paddingRight: 10
         )
         
-        let viewComment = UIView()
-        viewComment.addSubview(tweetComment)
-        tweetComment.anchor(
-            top: viewComment.topAnchor,
-            left: viewComment.leftAnchor,
-            bottom: viewComment.bottomAnchor
-        )
-        
-        let viewRetweet = UIView()
-        viewRetweet.addSubview(tweetRetweet)
-        tweetRetweet.anchor(
-            top: viewRetweet.topAnchor,
-            left: viewRetweet.leftAnchor,
-            bottom: viewRetweet.bottomAnchor
-        )
-        
-        let viewLike = UIView()
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(likeTap))
-        viewLike.addGestureRecognizer(tapGestureRecognizer)
-        viewLike.addSubview(tweetLike)
-        tweetLike.anchor(
-            top: viewLike.topAnchor,
-            left: viewLike.leftAnchor,
-            bottom: viewLike.bottomAnchor
-        )
-        
-        let viewShare = UIView()
-        viewShare.addSubview(tweetShare)
-        tweetShare.anchor(
-            top: viewShare.topAnchor,
-            left: viewShare.leftAnchor,
-            bottom: viewShare.bottomAnchor
-        )
-        
         let stackViewActions = UIStackView()
-        stackViewActions.addArrangedSubview(viewComment)
-        stackViewActions.addArrangedSubview(viewRetweet)
-        stackViewActions.addArrangedSubview(viewLike)
-        stackViewActions.addArrangedSubview(viewShare)
+        stackViewActions.addArrangedSubview(tweetComment)
+        stackViewActions.addArrangedSubview(tweetRetweet)
+        stackViewActions.addArrangedSubview(tweetLike)
+        stackViewActions.addArrangedSubview(tweetShare)
         
         stackViewActions.axis = .horizontal
         stackViewActions.alignment = .leading
-        stackViewActions.distribution = .fillEqually
+        stackViewActions.distribution = .fill
+        stackView.spacing = 10
 
         contentView.addSubview(stackViewActions)
 
@@ -226,7 +193,7 @@ class FeedView: UITableViewCell {
             left: contentView.leftAnchor,
             bottom: contentView.bottomAnchor,
             right: contentView.rightAnchor,
-            paddingTop: 10,
+            paddingTop: 30,
             paddingLeft: 65,
             paddingBottom: 10
         )

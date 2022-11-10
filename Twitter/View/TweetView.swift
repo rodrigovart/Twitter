@@ -27,7 +27,7 @@ class TweetView: UIView {
         return imageView
     }()
     
-    private lazy var tweetTextView: KMPlaceholderTextView = {
+    lazy var tweetTextView: KMPlaceholderTextView = {
         let textView = KMPlaceholderTextView()
         textView.delegate = self
         textView.placeholder = "What's happening?"

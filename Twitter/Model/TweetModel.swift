@@ -37,11 +37,11 @@ struct Tweet {
     }
     
     init () {
-        self.uid = "1h0QYilc9kZ0b5fjssx73B2QNGm1"
+        self.uid = ""
         self.time = Int(Date.now.timeIntervalSince1970)
         self.likes = 0
         self.retweets = 0
-        self.content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non diam id magna dignissim porta. Etiam quis placerat diam, nec varius felis. Mauris in justo nec metus dictum vestibulum"
+        self.content = ""
         self.imageUrl = defaults.string(forKey: "image_url") ?? ""
     }
     

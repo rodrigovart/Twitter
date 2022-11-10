@@ -17,7 +17,7 @@ class SignUpView: UIView {
     
     var delegate: SignUpViewController?
     
-    private lazy var imagePhoto: UIImageView = {
+    lazy var imagePhoto: UIImageView = {
         let imagePhoto = UIImageView()
         imagePhoto.translatesAutoresizingMaskIntoConstraints = false
         imagePhoto.isUserInteractionEnabled = true
@@ -29,7 +29,7 @@ class SignUpView: UIView {
         return imagePhoto
     }()
     
-    private lazy var emailTextField: SkyFloatingLabelTextFieldWithIcon = {
+    lazy var emailTextField: SkyFloatingLabelTextFieldWithIcon = {
         let textField = SkyFloatingLabelTextFieldWithIcon()
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         textField.iconType = .image
@@ -46,7 +46,7 @@ class SignUpView: UIView {
         return textField
     }()
     
-    private lazy var passwordTextField: SkyFloatingLabelTextFieldWithIcon = {
+    lazy var passwordTextField: SkyFloatingLabelTextFieldWithIcon = {
         let textField = SkyFloatingLabelTextFieldWithIcon()
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         textField.iconType = .image
@@ -64,7 +64,7 @@ class SignUpView: UIView {
         return textField
     }()
     
-    private lazy var fullNameTextField: SkyFloatingLabelTextFieldWithIcon = {
+    lazy var fullNameTextField: SkyFloatingLabelTextFieldWithIcon = {
         let textField = SkyFloatingLabelTextFieldWithIcon()
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         textField.iconType = .image
@@ -81,7 +81,7 @@ class SignUpView: UIView {
         return textField
     }()
     
-    private lazy var userNameTextField: SkyFloatingLabelTextFieldWithIcon = {
+    lazy var userNameTextField: SkyFloatingLabelTextFieldWithIcon = {
         let textField = SkyFloatingLabelTextFieldWithIcon()
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         textField.iconType = .image
