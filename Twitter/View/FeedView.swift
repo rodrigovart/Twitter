@@ -12,24 +12,25 @@ protocol FeedViewDelegate: AnyObject {
     func retweet()
     func like()
     func share()
+    func profile()
 }
 
 class FeedView: UITableViewCell {
     var delegate: FeedViewController?
-    var isLiked = false
-    var isRetweeted = false
-    
-    var buttonTapCallback: () -> () = { }
-    
     var tweet: Tweet?
     var user: User?
+    
+    var isLiked = false
+    var isRetweeted = false
     
     private lazy var tweetImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "palhaco")
         imageView.contentMode = .scaleAspectFit
         imageView.anchor(width: 50, height: 50)
+        let tap = UITapGestureRecognizer()
+        tap.addTarget(self, action: #selector(profileTap))
+        imageView.addGestureRecognizer(tap)
         return imageView
     }()
     
@@ -214,7 +215,6 @@ class FeedView: UITableViewCell {
 
 extension FeedView {
     @objc func commentTap() {
-        buttonTapCallback()
         delegate?.comment()
     }
     
@@ -244,5 +244,9 @@ extension FeedView {
     
     @objc func shareTap() {
         delegate?.share()
+    }
+    
+    @objc func profileTap() {
+        delegate?.profile()
     }
 }
